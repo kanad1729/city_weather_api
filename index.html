@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>City | Weather</title>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="form-group">
+            <label for="usr">Enter City Name</label>
+            <input type="text" class="form-control" id="cityInp">
+        </div>
+        <button id="myBtn" type="button" class="btn btn-primary">Primary</button>
+        
+        <hr/>
+
+        <div class="card offset-4" style="width: 18rem;">
+            <div class="card-body ">
+              <h5 class="card-title text-center">City Weather</h5>
+              <div id="weatherInfo" class="catd-text">
+                  <ul>
+                      <li>City </li>
+                      <li>Temprature</li>
+                      <li>Wind</li>
+                      <li>Humidity</li>
+                      <li>Pressure</li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+    
+       
+    </div>
+   
+    <script>
+
+        
+        
+        document.getElementById("myBtn").onclick = async()=>{
+
+            let cityInpt = document.getElementById("cityInp").value;
+          
+          var data =  await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityInpt}&units=metric&APPID=be437bcae106942d3e68e2c5049d7948`)
+            
+              var data2 = await data.json();
+
+                document.getElementById("weatherInfo").innerHTML = `        
+                <ul>
+                    <li>${data2.name} </li>
+                    <li>${data2.main.temp} Celcius</li>
+                    <li>${data2.main.humidity}%</li>
+                    <li>${data2.main.pressure}%</li>
+                    <li>${data2.main.description}</li>
+                    
+                </ul>                
+                `
+
+         
+        }
+    
+    </script>
+
+
+
+
+
+</body>
+</html>
